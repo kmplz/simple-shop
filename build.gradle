@@ -1,0 +1,19 @@
+buildscript {
+    ext {
+        springBootVersion = '2.1.2.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+plugins {
+    id 'net.ltgt.apt' version '0.18'
+}
+
+task build() {
+    dependsOn 'core:build'
+}

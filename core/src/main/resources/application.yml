@@ -1,0 +1,32 @@
+spring:
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+app:
+  security:
+    jwt-secret: 4SE4ECEgzweLvcDtdAhEq8rqB82XVjgV
+
+---
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/shop
+    username: shop
+    password: shop
+    hikari:
+      maximum-pool-size: 2
+
+---
+spring:
+  profiles: production
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://db:5432/shop
+    username: shop
+    password: CSJgYgATwwurxk9X
+    hikari:
+      maximum-pool-size: 2

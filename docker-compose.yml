@@ -1,0 +1,39 @@
+version: '3'
+services:
+  db:
+    container_name: db
+    image: postgres:11-alpine
+    logging:
+      driver: journald
+    restart: always
+    environment:
+      - POSTGRES_USER=shop
+      - POSTGRES_PASSWORD=CSJgYgATwwurxk9X
+      - POSTGRES_DB=shop
+    volumes:
+      - db:/var/lib/postgresql/data
+    networks:
+      - shop-network
+  migration:
+    container_name: flyway
+    build: ./migration
+    logging:
+      driver: journald
+    restart: always
+    command: -url=jdbc:postgresql://db:5432/shop -user=shop -password=CSJgYgATwwurxk9X migrate
+    networks:
+      - shop-network
+  core:
+    container_name: core
+    build: ./core
+    logging:
+      driver: journald
+    restart: always
+    environment:
+      - PROFILES=production
+    networks:
+        - shop-network
+networks:
+  shop-network:
+volumes:
+  db:
