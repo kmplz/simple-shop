@@ -29,12 +29,14 @@ public class UsersService {
     public void signUp(SignUpRequest request) {
         log.info("Registering user {}", request.getLogin());
         if (dao.loginExist(request.getLogin())) {
-            throw new ServiceException.LoginExistsException("There is an account with that login: " + request.getLogin());
+            throw new ServiceException.LoginExistsException("Account with login " + request.getLogin() + " already exists");
         }
         if (!dao.roleExist(request.getRoleId())) {
             throw new ServiceException.RoleDoesNotExistException("Role with id " + request.getRoleId() + " does not exist");
         }
         request.setPassword(passwordEncoder.encode(request.getPassword()));
+        request.setLogin(request.getLogin().trim());
+        request.setUsername(request.getUsername().trim());
         dao.save(request);
     }
 }

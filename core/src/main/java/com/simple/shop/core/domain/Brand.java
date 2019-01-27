@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
 @Data
-public class Category {
+public class Brand {
 
     @Null(groups = New.class)
     @NotNull(groups = Existing.class)

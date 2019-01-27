@@ -4,21 +4,19 @@ import com.simple.shop.core.config.AppConfig;
 import com.simple.shop.core.domain.api.Response;
 import com.simple.shop.core.domain.auth.SignInRequest;
 import com.simple.shop.core.domain.auth.SignUpRequest;
-import com.simple.shop.core.domain.User;
+import com.simple.shop.core.exception.ServiceException;
 import com.simple.shop.core.security.JwtUtils;
 import com.simple.shop.core.service.UsersService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -43,12 +41,10 @@ public class AuthEndpoint {
     public Response signIn(@RequestBody @Valid SignInRequest request) {
         Authentication authentication = manager.authenticate(getCredentials(request));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        Optional<User> user = usersService.getByLogin(request.getLogin());
-        if (user.isPresent()) {
-            return Response.ok(jwt.generate(user.get().getLogin()));
-        } else {
-            throw new UsernameNotFoundException("User " + request.getLogin() + " not found");
-        }
+        String login = request.getLogin();
+        return usersService.getByLogin(request.getLogin())
+                .map(user -> Response.ok(jwt.generate(login)))
+                .orElseThrow(() -> new ServiceException.LoginNotFoundException(login));
     }
 
     private UsernamePasswordAuthenticationToken getCredentials(SignInRequest request) {

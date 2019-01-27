@@ -1,8 +1,8 @@
 package com.simple.shop.core.endpoint;
 
-import com.simple.shop.core.domain.Category;
+import com.simple.shop.core.domain.Brand;
 import com.simple.shop.core.domain.api.Response;
-import com.simple.shop.core.service.CategoriesService;
+import com.simple.shop.core.service.BrandsService;
 import com.simple.shop.core.validation.groups.Existing;
 import com.simple.shop.core.validation.groups.New;
 import lombok.RequiredArgsConstructor;
@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/categories")
-public class CategoriesEndpoint {
+@RequestMapping("/api/brands")
+public class BrandsEndpoint {
 
-    private final CategoriesService service;
+    private final BrandsService service;
 
     @GetMapping
     public Response getAll() {
@@ -24,14 +24,14 @@ public class CategoriesEndpoint {
 
     @PostMapping
     @Secured("ROLE_ADMIN")
-    public Response create(@RequestBody @Validated(New.class) Category category) {
-        return Response.from(() -> service.create(category));
+    public Response create(@RequestBody @Validated(New.class) Brand brand) {
+        return Response.from(() -> service.create(brand));
     }
 
     @PutMapping
     @Secured("ROLE_ADMIN")
-    public Response update(@RequestBody @Validated(Existing.class) Category category) {
-        return Response.from(() -> service.update(category));
+    public Response update(@RequestBody @Validated(Existing.class) Brand brand) {
+        return Response.from(() -> service.update(brand));
     }
 
     @DeleteMapping("/{id}")

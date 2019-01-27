@@ -7,7 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.util.stream.Collectors;
+import static java.util.stream.Collectors.joining;
 
 @ControllerAdvice
 public class ExceptionControllerAdvice {
@@ -16,7 +16,7 @@ public class ExceptionControllerAdvice {
     public ResponseEntity<Response> handleValidationError(MethodArgumentNotValidException ex) {
         String message = ex.getBindingResult().getFieldErrors().stream()
                 .map(error -> String.format("%s %s", error.getField(), error.getDefaultMessage()))
-                .collect(Collectors.joining(", "));
+                .collect(joining(", "));
         return new ResponseEntity<>(Response.fail(message), HttpStatus.BAD_REQUEST);
     }
 }
