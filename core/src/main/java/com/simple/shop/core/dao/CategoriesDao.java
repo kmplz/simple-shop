@@ -11,7 +11,7 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class CategoryDao {
+public class CategoriesDao {
 
     private final NamedParameterJdbcTemplate jdbc;
 
