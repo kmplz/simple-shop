@@ -6,3 +6,4 @@ logs
 out
 *.log
 *.retry
+node_modules
