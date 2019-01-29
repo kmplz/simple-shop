@@ -56,7 +56,7 @@ select:focus,
 }
 
 .brand:hover {
-  background-color: #f3f3f3;
+  background-color: rgba(170, 119, 159, 0.1);
 }
 
 .rating {
@@ -80,4 +80,19 @@ select:focus,
   color: white !important;
   background-color: #424348 !important;
   border-color: #dee2e6;
+}
+
+.nav-link {
+  cursor: pointer;
+}
+
+html,
+body,
+#root {
+  height: 100%
+}
+
+.login-form {
+  max-width: 460px;
+  background-color: #e9ecef;
 }

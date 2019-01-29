@@ -18,3 +18,8 @@ export const BRANDS = [
     {id: 3, name: 'Samsung', count: 3},
     {id: 4, name: 'Lenovo', count: 4},
 ];
+
+export const CATEGORIES = [
+    {id: 1, name: 'Mobile phones'},
+    {id: 2, name: 'Laptops'}
+];

@@ -6,9 +6,18 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import 'font-awesome/css/font-awesome.min.css';
 import './index.css';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
+import Login from './pages/Login';
 import $ from 'jquery'; // eslint-disable-line no-unused-vars
 import Popper from 'popper.js'; // eslint-disable-line no-unused-vars
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/login" component={Login} />
+      <Route path="/" component={App} />
+    </Switch>
+  </BrowserRouter>,
+  document.getElementById('root'));
 
 serviceWorker.unregister();
