@@ -6,9 +6,78 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #fbfbfb;
+  color: #444447;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.breadcrumbs {
+  color: #a26b96;
+}
+
+.breadcrumbs .fa-chevron-right {
+  color: #adb0b2;
+  font-size: 10px;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+select:focus,
+.page-link:focus,
+.uneditable-input:focus {
+  border-color: #a26b96 !important;
+  box-shadow: 0 0 0 0.2rem rgba(170, 119, 159, 0.6) !important;
+}
+
+.section-header {
+  border-bottom: 2px solid #444447;
+  color: #444447;
+}
+
+.brand {
+  cursor: pointer;
+}
+
+.brand:hover {
+  background-color: #f3f3f3;
+}
+
+.rating {
+  cursor: pointer;
+}
+
+.star {
+  color: #c7c7c7;
+}
+
+.star.active {
+  color: #a26b96;
+}
+
+.page-link {
+  color: #444447 !important;
+  background-color: white !important;
+}
+
+.page-item.active .page-link {
+  color: white !important;
+  background-color: #424348 !important;
+  border-color: #dee2e6;
 }
