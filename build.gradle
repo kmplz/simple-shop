@@ -1,12 +1,17 @@
 buildscript {
     ext {
         springBootVersion = '2.1.2.RELEASE'
+        gradleNodeVersion = '1.2.0'
     }
     repositories {
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath "com.moowork.gradle:gradle-node-plugin:${gradleNodeVersion}"
     }
 }
 
@@ -15,5 +20,5 @@ plugins {
 }
 
 task build() {
-    dependsOn 'core:build'
+    dependsOn 'core:build', 'web:build'
 }

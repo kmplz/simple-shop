@@ -1,0 +1,22 @@
+apply plugin: 'com.moowork.node'
+
+task cleanUI(type: Delete) {
+    delete = "$projectDir/app/build"
+}
+
+task prepareUI(type: YarnTask) {
+    workingDir = file('app')
+    args = ['install']
+}
+
+task buildUI(type: YarnTask, dependsOn: 'prepareUI') {
+    workingDir = file('app')
+    args = ['run', 'build']
+    inputs.file("$projectDir/app/yarn.lock")
+    inputs.file("$projectDir/app/package.json")
+    inputs.dir("$projectDir/app/src")
+    inputs.dir("$projectDir/app/public")
+    outputs.dir("$projectDir/app/build")
+}
+
+task build(dependsOn: ['buildUI'])

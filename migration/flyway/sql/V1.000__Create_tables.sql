@@ -6,6 +6,7 @@ CREATE TABLE roles (
 CREATE TABLE users (
   id                BIGSERIAL     NOT NULL PRIMARY KEY,
   username          VARCHAR(256)  NOT NULL,
+  login             VARCHAR(50)   NOT NULL UNIQUE,
   password_hash     TEXT          NOT NULL,
   role_id           BIGINT        NOT NULL REFERENCES roles(id)
 );
@@ -34,6 +35,8 @@ CREATE TABLE files (
 CREATE TABLE products (
   id                BIGSERIAL     NOT NULL PRIMARY KEY,
   name              VARCHAR(256)  NOT NULL,
+  description       TEXT          NOT NULL,
+  price             NUMERIC       NOT NULL,
   category_id       BIGINT        NOT NULL REFERENCES categories(id),
   brand_id          BIGINT        NOT NULL REFERENCES brands(id),
   created_at        TIMESTAMP     NOT NULL DEFAULT current_timestamp,
