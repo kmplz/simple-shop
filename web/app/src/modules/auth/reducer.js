@@ -1,32 +1,71 @@
-import {LOCAL_STORAGE_TOKEN_KEY} from "../../utils/const";
-import {SIGN_IN_FAILURE, SIGN_IN_REQUEST, SIGN_IN_SUCCESS} from "./constants";
+import {LOCAL_STORAGE_TOKEN_KEY} from '../../utils/const';
+import {
+  LOAD_ROLES_SUCCESS,
+  AUTH_FAILURE,
+  AUTH_REQUEST,
+  AUTH_SUCCESS,
+  ME_REQUEST,
+  ME_SUCCESS,
+  ME_FAILURE
+} from './constants';
 
 const initialState = {
   isAuthenticated: null,
   error: '',
   token: localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY),
-  loading: false
+  loading: false,
+  roles: [],
+  user: null,
+  loadingUser: true
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case SIGN_IN_REQUEST:
+    case AUTH_REQUEST:
       return {
-        ...initialState,
+        ...state,
+        isAuthenticated: null,
+        error: '',
         loading: true
       };
-    case SIGN_IN_SUCCESS:
+    case AUTH_SUCCESS:
+      localStorage.setItem(LOCAL_STORAGE_TOKEN_KEY, action.payload);
       return {
-        ...initialState,
+        ...state,
+        error: '',
+        loading: false,
         isAuthenticated: true,
         token: action.payload
       };
-    case SIGN_IN_FAILURE:
+    case AUTH_FAILURE:
       return {
         ...state,
         loading: false,
         isAuthenticated: false,
         error: action.errorMsg
+      };
+    case LOAD_ROLES_SUCCESS:
+      return {
+        ...state,
+        roles: action.payload
+      };
+    case ME_REQUEST:
+      return {
+        ...state,
+        loadingUser: true
+      };
+    case ME_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload,
+        loadingUser: false
+      };
+    case ME_FAILURE:
+      return {
+        ...state,
+        loadingUser: false,
+        isAuthenticated: false
       };
     default:
       return state;

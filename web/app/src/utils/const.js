@@ -29,4 +29,4 @@ export const AuthMode = {
   SIGN_UP: 'Sign up'
 };
 
-export const LOCAL_STORAGE_TOKEN_KEY = 'token';
+export const LOCAL_STORAGE_TOKEN_KEY = 'jwt';

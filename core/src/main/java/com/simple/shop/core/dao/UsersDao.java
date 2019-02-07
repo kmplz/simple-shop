@@ -1,6 +1,7 @@
 package com.simple.shop.core.dao;
 
 import com.simple.shop.core.domain.User;
+import com.simple.shop.core.domain.auth.Role;
 import com.simple.shop.core.domain.auth.SignUpRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
@@ -10,6 +11,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -53,5 +55,12 @@ public class UsersDao {
     public Boolean roleExist(Integer roleId) {
         return jdbc.queryForObject("SELECT count(1) > 0 from roles WHERE id = :id",
                 singletonMap("id", roleId), Boolean.class);
+    }
+
+    public List<Role> getRoles() {
+        return jdbc.query(
+                "SELECT * FROM roles ORDER BY id",
+                new HashMap<>(), (rs, rowNum) -> new Role(rs.getInt("id"), rs.getString("name"))
+        );
     }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default ({label, secured, value, onChange, id}) => (
+const FormInput = ({label, secured, value, onChange, id}) => (
   <div className="form-group row">
     <label htmlFor={id} className="col-sm-2 col-form-label">{label}</label>
     <div className="col-sm-10">
@@ -15,3 +16,20 @@ export default ({label, secured, value, onChange, id}) => (
     </div>
   </div>
 );
+
+FormInput.propTypes = {
+  label: PropTypes.string,
+  secured: PropTypes.bool,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  id: PropTypes.string.isRequired
+};
+
+FormInput.defaultProps = {
+  label: '',
+  secured: false,
+  value: '',
+  onChange: () => {}
+};
+
+export default FormInput;

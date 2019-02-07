@@ -8,6 +8,7 @@ export default ({product: {name, price, rating}}) => (
     <div className="my-3 text-center text-muted rating">
       {[1, 2, 3, 4, 5].map(star => <span
         className={`fa fa-star star ${star <= rating && 'active'}`}
+        key={star}
       />)}
     </div>
     <h6 className="text-center text-muted">${price}</h6>

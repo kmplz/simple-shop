@@ -12,7 +12,7 @@ const ModeSelect = ({activeMode, onChange}) => {
 };
 
 ModeSelect.propTypes = {
-  activeMode: PropTypes.string.isRequired,
+  activeMode: PropTypes.oneOf([AuthMode.SIGN_UP, AuthMode.SIGN_IN]),
   onChange: PropTypes.func
 };
 

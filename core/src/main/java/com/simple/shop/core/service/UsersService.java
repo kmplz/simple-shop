@@ -2,6 +2,7 @@ package com.simple.shop.core.service;
 
 import com.simple.shop.core.dao.UsersDao;
 import com.simple.shop.core.domain.User;
+import com.simple.shop.core.domain.auth.Role;
 import com.simple.shop.core.domain.auth.SignUpRequest;
 import com.simple.shop.core.exception.ServiceException;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -38,5 +40,10 @@ public class UsersService {
         request.setLogin(request.getLogin().trim());
         request.setUsername(request.getUsername().trim());
         dao.save(request);
+    }
+
+    public List<Role> getRoles() {
+        log.info("Getting roles");
+        return dao.getRoles();
     }
 }

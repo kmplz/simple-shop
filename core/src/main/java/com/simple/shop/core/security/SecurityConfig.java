@@ -3,6 +3,7 @@ package com.simple.shop.core.security;
 import com.simple.shop.core.config.AppConfig;
 import com.simple.shop.core.domain.User;
 import com.simple.shop.core.service.UsersService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -40,9 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        AppConfig config = getApplicationContext().getBean(AppConfig.class);
         UserDetailsService userDetailsService = getApplicationContext().getBean(UserDetailsService.class);
-        OncePerRequestFilter filter = jwtFilter(config.getJwt().getSecret(), userDetailsService);
+        OncePerRequestFilter filter = jwtFilter(userDetailsService);
         http.csrf().disable()
                 .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED)).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
@@ -70,8 +70,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-    private OncePerRequestFilter jwtFilter(String secret, UserDetailsService userDetailsService) {
-        JwtUtils jwt = new JwtUtils(secret);
+    @Bean
+    public JwtUtils jwtUtils() {
+        AppConfig config = getApplicationContext().getBean(AppConfig.class);
+        return new JwtUtils(config.getJwt().getSecret());
+    }
+
+    private OncePerRequestFilter jwtFilter(UserDetailsService userDetailsService) {
+        JwtUtils jwt = getApplicationContext().getBean(JwtUtils.class);
         return new OncePerRequestFilter() {
             @Override
             public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)

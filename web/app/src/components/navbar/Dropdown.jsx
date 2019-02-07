@@ -7,6 +7,7 @@ export default ({title, links}) => (
     <DropdownButton>{title}</DropdownButton>
     <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
       {links.map(item => <Link
+        key={item.id}
         className="dropdown-item"
         to={`/products/category/${item.id}`}
       >

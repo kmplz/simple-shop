@@ -10,6 +10,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Login from './pages/Login';
 import store from './store';
 import {Provider} from 'react-redux';
+import {protect} from './security/protect';
 import $ from 'jquery'; // eslint-disable-line no-unused-vars
 import Popper from 'popper.js'; // eslint-disable-line no-unused-vars
 
@@ -18,7 +19,7 @@ ReactDOM.render(
     <Provider store={store}>
       <Switch>
         <Route exact path="/login" component={Login} />
-        <Route path="/" component={App} />
+        <Route path="/" component={protect(App)} />
       </Switch>
     </Provider>
   </BrowserRouter>,
