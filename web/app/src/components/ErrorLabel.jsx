@@ -5,7 +5,7 @@ const ErrorLabel = ({message}) => (
   <Fragment>
     {message ?
       <div className="alert alert-danger rounded-0" role="alert">
-        Ошибка
+        {message}
       </div>
     :
     <div>&nbsp;</div>

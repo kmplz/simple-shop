@@ -28,3 +28,5 @@ export const AuthMode = {
   SIGN_IN: 'Sign in',
   SIGN_UP: 'Sign up'
 };
+
+export const LOCAL_STORAGE_TOKEN_KEY = 'token';
