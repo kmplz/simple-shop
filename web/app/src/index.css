@@ -96,3 +96,8 @@ body,
   max-width: 460px;
   background-color: #e9ecef;
 }
+
+.auth-mode {
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, {Fragment} from 'react';
 import Navbar from './components/Navbar';
 import Products from './pages/Products';
 import ProductDetails from './pages/ProductDetails';

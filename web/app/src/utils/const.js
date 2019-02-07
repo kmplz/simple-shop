@@ -23,3 +23,8 @@ export const CATEGORIES = [
     {id: 1, name: 'Mobile phones'},
     {id: 2, name: 'Laptops'}
 ];
+
+export const AuthMode = {
+  SIGN_IN: 'Sign in',
+  SIGN_UP: 'Sign up'
+};
